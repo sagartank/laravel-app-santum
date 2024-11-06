@@ -1,0 +1,65 @@
+1. php artisan make:event profilecheck
+
+
+2 . php artisan make:listener sendprofilechecknotification --event=profilecheck <event 
+	name>
+
+
+
+	ek event ni  ek listener hoi  OR
+	ek event ni  multiple listener  hoi
+
+
+	event  resgister krvi pde..
+
+
+	laravel-app\app\Providers\EventServiceProvider.php
+
+	use App\Events\Profilecheck;
+	use App\Listeners\Sendprofilechecknotification;
+
+		resgister karo
+
+		protected $listen = [
+	        Registered::class => [
+	            SendEmailVerificationNotification::class,
+	        ],
+
+	         profilecheck::class => [  // event name
+	            sendprofilechecknotification::class,  // listener name
+	        ],
+    ];
+
+
+3. php artisan make:mail ProfileCheckedMail -m emails.profile_checked
+
+4.  php artisan make:job SendProfileCheckedMailJob
+
+
+
+php artisan queue:work
+=======================
+
+demo  queue and jobs
+
+1. php artisan queue:table
+
+2. php artisan migrate
+
+3. php artisan make:job SendTestMailJob
+
+3. php artisan make:mail SendMarkdownMAil -m emails.demo_mail
+
+4. php artisan queue:work
+
+
+
+=========================
+
+demo notification
+
+1. php artisan make:notification UserLoginNotification
+
+2. php artisan notification:table
+
+3 .php artisan migrate
